@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Municipio;
-use App\Http\Requests\StoreMunicipioRequest;
-use App\Http\Requests\UpdateMunicipioRequest;
+use App\Models\Municipio as Model;
+use App\Http\Requests\StoreMunicipioRequest as StoreRequest;
+use App\Http\Requests\UpdateMunicipioRequest as UpdateRequest;
+use Illuminate\Http\Request;
+use App\Http\Resources\MunicipioResource as Resource;
+use App\Http\Resources\MunicipioCollection as Collection;
 
 class MunicipioController extends Controller
 {
@@ -13,7 +16,7 @@ class MunicipioController extends Controller
      */
     public function index()
     {
-        return Municipio::all();
+        return new Collection(Model::all());
     }
 
     /**
@@ -27,7 +30,7 @@ class MunicipioController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreMunicipioRequest $request)
+    public function store(StoreRequest $request)
     {
         //
     }
@@ -35,15 +38,16 @@ class MunicipioController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Municipio $municipio)
+    public function show(Int $id)
     {
-        //
+        $model = Model::findOrFail($id);
+        return new Resource($model);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Municipio $municipio)
+    public function edit(Model $model)
     {
         //
     }
@@ -51,7 +55,7 @@ class MunicipioController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateMunicipioRequest $request, Municipio $municipio)
+    public function update(UpdateRequest $request, Model $model)
     {
         //
     }
@@ -59,7 +63,7 @@ class MunicipioController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Municipio $municipio)
+    public function destroy(Model $model)
     {
         //
     }

@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Estado;
-use App\Http\Requests\StoreEstadoRequest;
-use App\Http\Requests\UpdateEstadoRequest;
+use App\Models\Estado as Model;
+use App\Http\Requests\StoreEstadoRequest as StoreRequest;
+use App\Http\Requests\UpdateEstadoRequest as UpdateRequest;
+use Illuminate\Http\Request;
+use App\Http\Resources\EstadoResource as Resource;
+use App\Http\Resources\EstadoCollection as Collection;
 
 class EstadoController extends Controller
 {
@@ -13,7 +16,7 @@ class EstadoController extends Controller
      */
     public function index()
     {
-        return Estado::all();
+        return new Collection(Model::all());
     }
 
     /**
@@ -27,7 +30,7 @@ class EstadoController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreEstadoRequest $request)
+    public function store(StoreRequest $request)
     {
         //
     }
@@ -35,15 +38,16 @@ class EstadoController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Estado $estado)
+    public function show(Int $id)
     {
-        //
+        $model = Model::findOrFail($id);
+        return new Resource($model);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Estado $estado)
+    public function edit(Model $model)
     {
         //
     }
@@ -51,7 +55,7 @@ class EstadoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateEstadoRequest $request, Estado $estado)
+    public function update(UpdateRequest $request, Model $model)
     {
         //
     }
@@ -59,7 +63,7 @@ class EstadoController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Estado $estado)
+    public function destroy(Model $model)
     {
         //
     }

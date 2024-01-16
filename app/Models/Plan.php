@@ -10,6 +10,13 @@ class Plan extends Model
     use HasFactory;
 
     /**
+     * The table associated with the model
+     * 
+     * @var string
+     */
+    //protected $table = 'plans';
+
+    /**
      * Get the busqueda that owns the plan de busqueda.
      */
     public function busqueda() {

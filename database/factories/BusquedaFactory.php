@@ -26,15 +26,15 @@ class BusquedaFactory extends Factory
 
         $categoria = Categoria::inRandomOrder()->first()->id;
         $fase = Fase::inRandomOrder()->first()->id;
-        $fechaInicial = $myFaker->dateTimeBetween('-3 month', 'now');
-        $fechaFinal = $myFaker->dateTimeBetween($fechaInicial, '+1 month');
+        $fechaInicial = $myFaker->dateTimeBetween('now', '+1 month');
+        $fechaFinal =  random_int(0, 1) ? $myFaker->dateTimeBetween($fechaInicial, '+1 month') : null;
         $lat = $myFaker->latitude;
         $lng = $myFaker->longitude;
 
         return [
             'categoria_id' => $categoria,
             'fase_id' => $fase,
-            'lugar_elaboracion' => Municipio::where('nombre', 'Xalapa')->first()->id,
+            'lugar_creacion' => Municipio::where('nombre', 'Xalapa')->first()->id,
             'fecha_inicial' => $fechaInicial,
             'fecha_final' => $fechaFinal,
             'coordenadas' => new Point($lat, $lng),

@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Bitacora;
-use App\Http\Requests\StoreBitacoraRequest;
-use App\Http\Requests\UpdateBitacoraRequest;
+use App\Models\Bitacora as Model;
+use App\Http\Requests\StoreBitacoraRequest as StoreRequest;
+use App\Http\Requests\UpdateBitacoraRequest as UpdateRequest;
+use Illuminate\Http\Request;
+use App\Http\Resources\BitacoraResource as Resource;
+use App\Http\Resources\BitacoraCollection as Collection;
 
 class BitacoraController extends Controller
 {
@@ -13,7 +16,7 @@ class BitacoraController extends Controller
      */
     public function index()
     {
-        return Bitacora::all();
+        return new Collection(Model::all());
     }
 
     /**
@@ -27,7 +30,7 @@ class BitacoraController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreBitacoraRequest $request)
+    public function store(StoreRequest $request)
     {
         //
     }
@@ -35,15 +38,16 @@ class BitacoraController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Bitacora $bitacora)
+    public function show(Int $id)
     {
-        //
+        $model = Model::findOrFail($id);
+        return new Resource($model);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Bitacora $bitacora)
+    public function edit(Model $model)
     {
         //
     }
@@ -51,7 +55,7 @@ class BitacoraController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateBitacoraRequest $request, Bitacora $bitacora)
+    public function update(UpdateRequest $request, Model $model)
     {
         //
     }
@@ -59,7 +63,7 @@ class BitacoraController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Bitacora $bitacora)
+    public function destroy(Model $model)
     {
         //
     }

@@ -10,6 +10,13 @@ class Metodologia extends Model
     use HasFactory;
 
     /**
+     * The table associated with the model
+     * 
+     * @var string
+     */
+    protected $table = 'metodologias';
+
+    /**
      * Get the busqueda that owns the metodologia.
      */
     public function busqueda() {

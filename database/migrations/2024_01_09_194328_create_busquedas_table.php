@@ -15,17 +15,18 @@ return new class extends Migration
             $table->id();
             $table->foreignId('categoria_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
             $table->foreignId('fase_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
-            $table->foreignId('lugar_elaboracion')->constrained(
+            $table->date('fecha_creacion')->default(now());
+            $table->foreignId('lugar_creacion')->constrained(
                 table: 'municipios'
             )->cascadeOnUpdate()->cascadeOnDelete();
-            $table->date('fecha_inicial');
+            $table->date('fecha_inicial')->nullable();
             $table->date('fecha_final')->nullable();
             $table->point('coordenadas')->nullable();
             $table->string('localidad');
             $table->foreignId('lugar_comision')->constrained(
                 table: 'municipios'
             )->cascadeOnUpdate()->cascadeOnDelete();
-            $table->float('extension_comision');
+            $table->float('extension_comision')->nullable();
             $table->text('consideraciones_finales')->nullable();
             $table->timestamps();
         });

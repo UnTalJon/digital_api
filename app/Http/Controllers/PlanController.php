@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Plan;
-use App\Http\Requests\StorePlanRequest;
-use App\Http\Requests\UpdatePlanRequest;
+use App\Models\Plan as Model;
+use App\Http\Requests\StorePlanRequest as StoreRequest;
+use App\Http\Requests\UpdatePlanRequest as UpdateRequest;
+use Illuminate\Http\Request;
+use App\Http\Resources\PlanResource as Resource;
+use App\Http\Resources\PlanCollection as Collection;
 
 class PlanController extends Controller
 {
@@ -13,7 +16,7 @@ class PlanController extends Controller
      */
     public function index()
     {
-        return Plan::all();
+        return new Collection(Model::all());
     }
 
     /**
@@ -27,7 +30,7 @@ class PlanController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StorePlanRequest $request)
+    public function store(StoreRequest $request)
     {
         //
     }
@@ -35,15 +38,18 @@ class PlanController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Plan $plan)
+    public function show(Int $id)
     {
-        //
+        $model = Model::with('bitacoras', 'imagenes');
+        $response = $model->findOrFail($id);
+
+        return new Resource($response);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Plan $plan)
+    public function edit(Model $model)
     {
         //
     }
@@ -51,7 +57,7 @@ class PlanController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdatePlanRequest $request, Plan $plan)
+    public function update(UpdateRequest $request, Model $model)
     {
         //
     }
@@ -59,7 +65,7 @@ class PlanController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Plan $plan)
+    public function destroy(Model $model)
     {
         //
     }

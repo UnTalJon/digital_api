@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Metodologia;
-use App\Http\Requests\StoreMetodologiaRequest;
-use App\Http\Requests\UpdateMetodologiaRequest;
+use App\Models\Metodologia as Model;
+use App\Http\Requests\StoreMetodologiaRequest as StoreRequest;
+use App\Http\Requests\UpdateMetodologiaRequest as UpdateRequest;
+use Illuminate\Http\Request;
+use App\Http\Resources\MetodologiaResource as Resource;
+use App\Http\Resources\MetodologiaCollection as Collection;
 
 class MetodologiaController extends Controller
 {
@@ -13,7 +16,7 @@ class MetodologiaController extends Controller
      */
     public function index()
     {
-        return Metodologia::all();
+        return new Collection(Model::all());
     }
 
     /**
@@ -27,7 +30,7 @@ class MetodologiaController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreMetodologiaRequest $request)
+    public function store(StoreRequest $request)
     {
         //
     }
@@ -35,15 +38,18 @@ class MetodologiaController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Metodologia $metodologia)
+    public function show(Int $id)
     {
-        //
+        $model = Model::with('bitacoras', 'imagenes');
+        $response = $model->findOrFail($id);
+
+        return new Resource($response);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Metodologia $metodologia)
+    public function edit(Model $model)
     {
         //
     }
@@ -51,7 +57,7 @@ class MetodologiaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateMetodologiaRequest $request, Metodologia $metodologia)
+    public function update(UpdateRequest $request, Model $model)
     {
         //
     }
@@ -59,7 +65,7 @@ class MetodologiaController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Metodologia $metodologia)
+    public function destroy(Model $model)
     {
         //
     }

@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Particularidad;
-use App\Http\Requests\StoreParticularidadRequest;
-use App\Http\Requests\UpdateParticularidadRequest;
+use App\Models\Particularidad as Model;
+use App\Http\Requests\StoreParticularidadRequest as StoreRequest;
+use App\Http\Requests\UpdateParticularidadRequest as UpdateRequest;
+use Illuminate\Http\Request;
+use App\Http\Resources\ParticularidadResource as Resource;
+use App\Http\Resources\ParticularidadCollection as Collection;
 
 class ParticularidadController extends Controller
 {
@@ -13,7 +16,7 @@ class ParticularidadController extends Controller
      */
     public function index()
     {
-        return Particularidad::all();
+        return new Collection(Model::all());
     }
 
     /**
@@ -27,7 +30,7 @@ class ParticularidadController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreParticularidadRequest $request)
+    public function store(StoreRequest $request)
     {
         //
     }
@@ -35,15 +38,18 @@ class ParticularidadController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Particularidad $particularidad)
+    public function show(Int $id)
     {
-        //
+        $model = Model::with('bitacoras', 'imagenes');
+        $response = $model->findOrFail($id);
+
+        return new Resource($response);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Particularidad $particularidad)
+    public function edit(Model $model)
     {
         //
     }
@@ -51,7 +57,7 @@ class ParticularidadController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateParticularidadRequest $request, Particularidad $particularidad)
+    public function update(UpdateRequest $request, Model $model)
     {
         //
     }
@@ -59,7 +65,7 @@ class ParticularidadController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Particularidad $particularidad)
+    public function destroy(Model $model)
     {
         //
     }

@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Imagen;
-use App\Http\Requests\StoreImagenRequest;
-use App\Http\Requests\UpdateImagenRequest;
+use App\Models\Imagen as Model;
+use App\Http\Requests\StorePlanRequest as StoreRequest;
+use App\Http\Requests\UpdatePlanRequest as UpdateRequest;
+use Illuminate\Http\Request;
+use App\Http\Resources\ImagenResource as Resource;
+use App\Http\Resources\ImagenCollection as Collection;
 
 class ImagenController extends Controller
 {
@@ -13,7 +16,7 @@ class ImagenController extends Controller
      */
     public function index()
     {
-        return Imagen::all();
+        return new Collection(Model::all());
     }
 
     /**
@@ -27,7 +30,7 @@ class ImagenController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreImagenRequest $request)
+    public function store(StoreRequest $request)
     {
         //
     }
@@ -35,15 +38,16 @@ class ImagenController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Imagen $imagen)
+    public function show(Int $id)
     {
-        //
+        $model = Model::findOrFail($id);
+        return new Resource($model);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Imagen $imagen)
+    public function edit(Model $model)
     {
         //
     }
@@ -51,7 +55,7 @@ class ImagenController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateImagenRequest $request, Imagen $imagen)
+    public function update(UpdateRequest $request, Model $model)
     {
         //
     }
@@ -59,8 +63,9 @@ class ImagenController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Imagen $imagen)
+    public function destroy(Model $model)
     {
         //
     }
 }
+

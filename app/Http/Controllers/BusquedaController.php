@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Busqueda;
-use App\Http\Requests\StoreBusquedaRequest;
-use App\Http\Requests\UpdateBusquedaRequest;
-use App\Http\Resources\BusquedaCollection;
-use App\Filters\BusquedaFilter;
+use App\Models\Busqueda as Model;
+use App\Http\Requests\StoreBusquedaRequest as StoreRequest;
+use App\Http\Requests\UpdateBusquedaRequest as UpdateRequest;
+use App\Http\Resources\BusquedaResource as Resource;
+use App\Http\Resources\BusquedaCollection as Collection;
+use App\Filters\BusquedaFilter as Filter;
 
 class BusquedaController extends Controller
 {
@@ -16,16 +17,18 @@ class BusquedaController extends Controller
      */
     public function index(Request $request)
     {
-        $filter = new BusquedaFilter();
-        $queryItems = $filter->transform($request);
-        $include = $request->query('include');
-        $busquedas = Busqueda::where($queryItems);
+        $filter = new Filter();
+        $filerItems = $filter->transform($request);
 
-        if($include) {
-            $busquedas = $busquedas->with('personas');
+        $detail = $request->query('detail');
+
+        $response = Model::where($filerItems);
+
+        if ($detail) {
+            $response = $response->with('personas', 'grupos');
         }
 
-        return new BusquedaCollection($busquedas->get()->append($request->query()));
+        return new Collection($response->get());
     }
 
     /**
@@ -39,7 +42,7 @@ class BusquedaController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreBusquedaRequest $request)
+    public function store(StoreRequest $request)
     {
         //
     }
@@ -47,15 +50,18 @@ class BusquedaController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Busqueda $busqueda)
+    public function show($id)
     {
-        //
+        $model = Model::with('personas', 'grupos', 'particularidad', 'metodologia', 'plan');
+        $response = $model->findOrFail($id);
+
+        return new Resource($response);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Busqueda $busqueda)
+    public function edit(Model $model)
     {
         //
     }
@@ -63,7 +69,7 @@ class BusquedaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateBusquedaRequest $request, Busqueda $busqueda)
+    public function update(UpdateRequest $request, Model $model)
     {
         //
     }
@@ -71,7 +77,7 @@ class BusquedaController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Busqueda $busqueda)
+    public function destroy(Model $model)
     {
         //
     }

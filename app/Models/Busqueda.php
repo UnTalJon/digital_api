@@ -14,18 +14,12 @@ class Busqueda extends Model
 
     use HasSpatial;
 
-    protected $fillables = [
-        'categoria_id',
-        'fase_id',
-        'lugar_elaboracion',
-        'fecha_inicial',
-        'fecha_final',
-        'coordenadas',
-        'localidad',
-        'lugar_comision',
-        'extension_comision',
-        'consideraciones_finales'
-    ];
+    /**
+     * The table associated with the model
+     * 
+     * @var string
+     */
+    protected $table = 'busquedas';
 
     protected $casts = [
         'coordenadas' => Point::class

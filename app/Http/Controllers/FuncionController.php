@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Funcion;
-use App\Http\Requests\StoreFuncionRequest;
-use App\Http\Requests\UpdateFuncionRequest;
+use App\Models\Funcion as Model;
+use App\Http\Requests\StoreFuncionRequest as StoreRequest;
+use App\Http\Requests\UpdateFuncionRequest as UpdateRequest;
+use Illuminate\Http\Request;
+use App\Http\Resources\FuncionResource as Resource;
+use App\Http\Resources\FuncionCollection as Collection;
 
 class FuncionController extends Controller
 {
@@ -13,7 +16,7 @@ class FuncionController extends Controller
      */
     public function index()
     {
-        return Funcion::all();
+        return new Collection(Model::all());
     }
 
     /**
@@ -27,7 +30,7 @@ class FuncionController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreFuncionRequest $request)
+    public function store(StoreRequest $request)
     {
         //
     }
@@ -35,15 +38,16 @@ class FuncionController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Funcion $funcion)
+    public function show(Int $id)
     {
-        //
+        $model = Model::findOrFail($id);
+        return new Resource($model);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Funcion $funcion)
+    public function edit(Model $model)
     {
         //
     }
@@ -51,7 +55,7 @@ class FuncionController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateFuncionRequest $request, Funcion $funcion)
+    public function update(UpdateRequest $request, Model $model)
     {
         //
     }
@@ -59,7 +63,7 @@ class FuncionController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Funcion $funcion)
+    public function destroy(Model $model)
     {
         //
     }

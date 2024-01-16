@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Fase;
-use App\Http\Requests\StoreFaseRequest;
-use App\Http\Requests\UpdateFaseRequest;
+use App\Models\Fase as Model;
+use App\Http\Requests\StoreFaseRequest as StoreRequest;
+use App\Http\Requests\UpdateFaseRequest as UpdateRequest;
+use Illuminate\Http\Request;
+use App\Http\Resources\FaseResource as Resource;
+use App\Http\Resources\FaseCollection as Collection;
 
 class FaseController extends Controller
 {
@@ -13,7 +16,7 @@ class FaseController extends Controller
      */
     public function index()
     {
-        return Fase::all();
+        return new Collection(Model::all());
     }
 
     /**
@@ -27,7 +30,7 @@ class FaseController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreFaseRequest $request)
+    public function store(StoreRequest $request)
     {
         //
     }
@@ -35,15 +38,16 @@ class FaseController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Fase $fase)
+    public function show(Int $id)
     {
-        //
+        $model = Model::findOrFail($id);
+        return new Resource($model);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Fase $fase)
+    public function edit(Model $model)
     {
         //
     }
@@ -51,7 +55,7 @@ class FaseController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateFaseRequest $request, Fase $fase)
+    public function update(UpdateRequest $request, Model $model)
     {
         //
     }
@@ -59,7 +63,7 @@ class FaseController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Fase $fase)
+    public function destroy(Model $model)
     {
         //
     }

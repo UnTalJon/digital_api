@@ -9,11 +9,11 @@ class ApiFilter {
     protected $columnMap = [];
     protected $operatorMap = [
         'eq' => '=',
+        'ne' => '!=',
         'lt' => '<',
         'lte' => '<=',
         'gt' => '>',
         'gte' => '>=',
-        'like' => 'like'
     ];
 
     public function transform(Request $request) {
@@ -28,10 +28,6 @@ class ApiFilter {
             $column = $this->columnMap[$parameter] ?? $parameter;
 
             foreach($operators as $operator) {
-                if ($operator == 'like') {
-                    $eloQuery[] = [$column, $this->operatorMap[$operator], '%' . $query[$operator] . '%'];
-                }
-
                 if(isset($query[$operator])) {
                     $eloQuery[] = [$column, $this->operatorMap[$operator], $query[$operator]];
                 }
