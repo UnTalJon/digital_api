@@ -21,11 +21,14 @@ return new class extends Migration
         Schema::create('bitacora_particularidad', function (Blueprint $table) {
             $table->foreignId('bitacora_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
             $table->foreignId('particularidad_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
+            $table->primary(['bitacora_id', 'particularidad_id']);
+
         });
 
         Schema::create('imagen_particularidad', function (Blueprint $table) {
             $table->foreignId('imagen_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
             $table->foreignId('particularidad_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
+            $table->primary(['imagen_id', 'particularidad_id']);
         });
     }
 

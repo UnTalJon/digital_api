@@ -34,16 +34,21 @@ return new class extends Migration
         Schema::create('busqueda_persona', function (Blueprint $table) {
             $table->foreignId('busqueda_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
             $table->foreignId('persona_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
+            $table->primary(['busqueda_id', 'persona_id']);
         });
 
         Schema::create('busqueda_grupo', function (Blueprint $table) {
             $table->foreignId('busqueda_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
             $table->foreignId('grupo_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
+            $table->primary(['busqueda_id', 'grupo_id']);
+
         });
 
         Schema::create('busqueda_imagen', function (Blueprint $table) {
             $table->foreignId('busqueda_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
             $table->foreignId('imagen_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
+            $table->primary(['busqueda_id', 'imagen_id']);
+
         });
     }
 

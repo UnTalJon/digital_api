@@ -20,6 +20,8 @@ return new class extends Migration
         Schema::create('bitacora_imagen', function (Blueprint $table) {
             $table->foreignId('bitacora_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
             $table->foreignId('imagen_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
+            $table->primary(['bitacora_id', 'imagen_id']);
+
         });
     }
 
