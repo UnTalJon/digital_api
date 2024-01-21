@@ -18,11 +18,9 @@ class MetodologiaFactory extends Factory
      */
     public function definition(): array
     {
-        $myFaker = Faker::create('es_ES');
-
         return [
             'busqueda_id' => Busqueda::inRandomOrder()->first()->id,
-            'contenido' => $myFaker->text()
+            'contenido' => fake()->text()
         ];
     }
 }

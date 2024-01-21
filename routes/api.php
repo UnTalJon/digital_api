@@ -32,6 +32,5 @@ Route::group(['prefix' => 'v1', 'namespace' => 'App\Http\Controllers'], function
     Route::apiResource('metodologias', MetodologiaController::class);
     Route::apiResource('planes', PlanController::class);
     Route::apiResource('bitacoras', BitacoraController::class);
-    Route::get('planes{plan}','PlanController@show');
     Route::apiResource('imagenes', ImagenController::class);
 });

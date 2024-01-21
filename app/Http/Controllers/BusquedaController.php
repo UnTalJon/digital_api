@@ -7,28 +7,17 @@ use App\Models\Busqueda as Model;
 use App\Http\Requests\StoreBusquedaRequest as StoreRequest;
 use App\Http\Requests\UpdateBusquedaRequest as UpdateRequest;
 use App\Http\Resources\BusquedaResource as Resource;
-use App\Http\Resources\BusquedaCollection as Collection;
-use App\Filters\BusquedaFilter as Filter;
 
 class BusquedaController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
+    public function index()
     {
-        $filter = new Filter();
-        $filerItems = $filter->transform($request);
+        $model = Model::with('personas', 'grupos')->get();
 
-        $detail = $request->query('detail');
-
-        $response = Model::where($filerItems);
-
-        if ($detail) {
-            $response = $response->with('personas', 'grupos');
-        }
-
-        return new Collection($response->get());
+        return Resource::collection($model);
     }
 
     /**

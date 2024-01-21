@@ -22,14 +22,12 @@ class BusquedaFactory extends Factory
      */
     public function definition(): array
     {
-        $myFaker = Faker::create('es_ES');
-
         $categoria = Categoria::inRandomOrder()->first()->id;
         $fase = Fase::inRandomOrder()->first()->id;
-        $fechaInicial = $myFaker->dateTimeBetween('now', '+1 month');
-        $fechaFinal =  random_int(0, 1) ? $myFaker->dateTimeBetween($fechaInicial, '+1 month') : null;
-        $lat = $myFaker->latitude;
-        $lng = $myFaker->longitude;
+        $fechaInicial = fake()->dateTimeBetween('now', '+1 month');
+        $fechaFinal =  random_int(0, 1) ? fake()->dateTimeBetween($fechaInicial, '+1 month') : null;
+        $lat = fake()->latitude;
+        $lng = fake()->longitude;
 
         return [
             'categoria_id' => $categoria,
@@ -38,10 +36,10 @@ class BusquedaFactory extends Factory
             'fecha_inicial' => $fechaInicial,
             'fecha_final' => $fechaFinal,
             'coordenadas' => new Point($lat, $lng),
-            'localidad' => $myFaker->city(),
+            'localidad' => fake()->city(),
             'lugar_comision' => Municipio::inRandomOrder()->first()->id,
-            'extension_comision' => $myFaker->randomFloat(2, 100, 2000),
-            'consideraciones_finales' => $myFaker->text()
+            'extension_comision' => fake()->randomFloat(2, 100, 2000),
+            'consideraciones_finales' => fake()->text()
         ];
     }
 }

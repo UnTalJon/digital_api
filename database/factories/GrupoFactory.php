@@ -18,11 +18,9 @@ class GrupoFactory extends Factory
      */
     public function definition(): array
     {
-        $myFaker = Faker::create('es_ES');
-
         $funcion = DB::table('funcions')->inRandomOrder()->first()->id;
 
-        $nombreForense = $myFaker->randomElement([
+        $nombreForense = fake()->randomElement([
             'Antropología Forense',
             'Odontología Forense',
             'Patología Forense',
@@ -40,7 +38,7 @@ class GrupoFactory extends Factory
             'Psicología Forense'
         ]);
 
-        $nombreInmediata = $myFaker->randomElement([
+        $nombreInmediata = fake()->randomElement([
             'Búsqueda Acuática',
             'Búsqueda en Montaña',
             'Búsqueda Urbana',
@@ -58,7 +56,7 @@ class GrupoFactory extends Factory
             'Unidad de Respuesta Rápida'
         ]);
 
-        $nombreAutoridades = $myFaker->randomElement([
+        $nombreAutoridades = fake()->randomElement([
             'Policía Municipal',
             'Policía Estatal',
             'Policía Federal',
@@ -74,7 +72,7 @@ class GrupoFactory extends Factory
             'Servicio Médico Forense (SEMEFO)'
         ]);
 
-        $nombreColectivo = $myFaker->randomElement([
+        $nombreColectivo = fake()->randomElement([
             'Luz de Esperanza',
             'Rastreadores de Paz',
             'Voces Unidas',
@@ -97,7 +95,7 @@ class GrupoFactory extends Factory
             'Caminos de Vida'
         ]);
 
-        $representante = $myFaker->name();
+        $representante = fake()->name();
 
         switch ($funcion) {
             case 1:

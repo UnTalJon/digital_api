@@ -7,7 +7,6 @@ use App\Http\Requests\StorePersonaRequest as StoreRequest;
 use App\Http\Requests\UpdatePersonaRequest as UpdateRequest;
 use Illuminate\Http\Request;
 use App\Http\Resources\PersonaResource as Resource;
-use App\Http\Resources\PersonaCollection as Collection;
 
 class PersonaController extends Controller
 {
@@ -16,7 +15,7 @@ class PersonaController extends Controller
      */
     public function index()
     {
-        return new Collection(Model::all());
+        return Resource::collection(Model::all());
     }
 
     /**

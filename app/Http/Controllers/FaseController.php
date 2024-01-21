@@ -7,7 +7,6 @@ use App\Http\Requests\StoreFaseRequest as StoreRequest;
 use App\Http\Requests\UpdateFaseRequest as UpdateRequest;
 use Illuminate\Http\Request;
 use App\Http\Resources\FaseResource as Resource;
-use App\Http\Resources\FaseCollection as Collection;
 
 class FaseController extends Controller
 {
@@ -16,7 +15,7 @@ class FaseController extends Controller
      */
     public function index()
     {
-        return new Collection(Model::all());
+        return Resource::collection(Model::all());
     }
 
     /**

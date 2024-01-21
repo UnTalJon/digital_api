@@ -7,7 +7,6 @@ use App\Http\Requests\StorePlanRequest as StoreRequest;
 use App\Http\Requests\UpdatePlanRequest as UpdateRequest;
 use Illuminate\Http\Request;
 use App\Http\Resources\ImagenResource as Resource;
-use App\Http\Resources\ImagenCollection as Collection;
 
 class ImagenController extends Controller
 {
@@ -16,7 +15,7 @@ class ImagenController extends Controller
      */
     public function index()
     {
-        return new Collection(Model::all());
+        return Resource::collection(Model::all());
     }
 
     /**

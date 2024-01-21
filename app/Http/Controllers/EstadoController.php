@@ -7,7 +7,6 @@ use App\Http\Requests\StoreEstadoRequest as StoreRequest;
 use App\Http\Requests\UpdateEstadoRequest as UpdateRequest;
 use Illuminate\Http\Request;
 use App\Http\Resources\EstadoResource as Resource;
-use App\Http\Resources\EstadoCollection as Collection;
 
 class EstadoController extends Controller
 {
@@ -16,7 +15,7 @@ class EstadoController extends Controller
      */
     public function index()
     {
-        return new Collection(Model::all());
+        return Resource::collection(Model::all());
     }
 
     /**

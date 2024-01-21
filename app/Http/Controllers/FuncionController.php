@@ -7,7 +7,6 @@ use App\Http\Requests\StoreFuncionRequest as StoreRequest;
 use App\Http\Requests\UpdateFuncionRequest as UpdateRequest;
 use Illuminate\Http\Request;
 use App\Http\Resources\FuncionResource as Resource;
-use App\Http\Resources\FuncionCollection as Collection;
 
 class FuncionController extends Controller
 {
@@ -16,7 +15,7 @@ class FuncionController extends Controller
      */
     public function index()
     {
-        return new Collection(Model::all());
+        return Resource::collection(Model::all());
     }
 
     /**

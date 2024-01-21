@@ -17,10 +17,8 @@ class BitacoraFactory extends Factory
      */
     public function definition(): array
     {
-        $myFaker = Faker::create('es_ES');
-
         return [
-            'contenido' => $myFaker->text()
+            'contenido' => fake()->text()
         ];
     }
 }

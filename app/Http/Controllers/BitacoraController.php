@@ -7,7 +7,6 @@ use App\Http\Requests\StoreBitacoraRequest as StoreRequest;
 use App\Http\Requests\UpdateBitacoraRequest as UpdateRequest;
 use Illuminate\Http\Request;
 use App\Http\Resources\BitacoraResource as Resource;
-use App\Http\Resources\BitacoraCollection as Collection;
 
 class BitacoraController extends Controller
 {
@@ -16,7 +15,7 @@ class BitacoraController extends Controller
      */
     public function index()
     {
-        return new Collection(Model::all());
+        return Resource::collection(Model::all());
     }
 
     /**

@@ -7,7 +7,6 @@ use App\Http\Requests\StoreParticularidadRequest as StoreRequest;
 use App\Http\Requests\UpdateParticularidadRequest as UpdateRequest;
 use Illuminate\Http\Request;
 use App\Http\Resources\ParticularidadResource as Resource;
-use App\Http\Resources\ParticularidadCollection as Collection;
 
 class ParticularidadController extends Controller
 {
@@ -16,7 +15,7 @@ class ParticularidadController extends Controller
      */
     public function index()
     {
-        return new Collection(Model::all());
+        return Resource::collection(Model::all());
     }
 
     /**

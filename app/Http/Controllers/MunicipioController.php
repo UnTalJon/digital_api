@@ -7,7 +7,6 @@ use App\Http\Requests\StoreMunicipioRequest as StoreRequest;
 use App\Http\Requests\UpdateMunicipioRequest as UpdateRequest;
 use Illuminate\Http\Request;
 use App\Http\Resources\MunicipioResource as Resource;
-use App\Http\Resources\MunicipioCollection as Collection;
 
 class MunicipioController extends Controller
 {
@@ -16,7 +15,7 @@ class MunicipioController extends Controller
      */
     public function index()
     {
-        return new Collection(Model::all());
+        return Resource::collection(Model::all());
     }
 
     /**

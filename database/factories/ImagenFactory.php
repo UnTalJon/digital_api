@@ -18,9 +18,7 @@ class ImagenFactory extends Factory
      */
     public function definition(): array
     {
-        $myFaker = Faker::create('es_ES');
-
-        $url = $myFaker->randomElement([
+        $url = fake()->randomElement([
             'https://images.pexels.com/photos/3225517/pexels-photo-3225517.jpeg',
             'https://images.pexels.com/photos/1547813/pexels-photo-1547813.jpeg',
             'https://images.pexels.com/photos/15286/pexels-photo.jpg',
@@ -61,12 +59,12 @@ class ImagenFactory extends Factory
             'https://images.pexels.com/photos/947885/pexels-photo-947885.jpeg',
             'https://images.pexels.com/photos/343720/pexels-photo-343720.jpeg'
         ]);
-        $lat = $myFaker->latitude;
-        $lng = $myFaker->longitude;
+        $lat = fake()->latitude;
+        $lng = fake()->longitude;
         
         return [
             'url' => $url,
-            'descripcion' => $myFaker->paragraph(1),
+            'descripcion' => fake()->paragraph(1),
             'coordenadas' => new Point($lat, $lng)
         ];
     }

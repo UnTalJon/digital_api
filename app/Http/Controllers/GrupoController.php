@@ -7,7 +7,6 @@ use App\Http\Requests\StoreGrupoRequest as StoreRequest;
 use App\Http\Requests\UpdateGrupoRequest as UpdateRequest;
 use Illuminate\Http\Request;
 use App\Http\Resources\GrupoResource as Resource;
-use App\Http\Resources\GrupoCollection as Collection;
 
 class GrupoController extends Controller
 {
@@ -16,7 +15,7 @@ class GrupoController extends Controller
      */
     public function index()
     {
-        return new Collection(Model::all());
+        return Resource::collection(Model::all());
     }
 
     /**

@@ -7,7 +7,6 @@ use App\Http\Requests\StoreCategoriaRequest as StoreRequest;
 use App\Http\Requests\UpdateCategoriaRequest as UpdateRequest;
 use Illuminate\Http\Request;
 use App\Http\Resources\CategoriaResource as Resource;
-use App\Http\Resources\CategoriaCollection as Collection;
 
 class CategoriaController extends Controller
 {
@@ -16,7 +15,7 @@ class CategoriaController extends Controller
      */
     public function index()
     {
-        return new Collection(Model::all());
+        return Resource::collection(Model::all());
     }
 
     /**

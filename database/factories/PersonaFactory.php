@@ -17,12 +17,10 @@ class PersonaFactory extends Factory
      */
     public function definition(): array
     {
-        $myFaker = Faker::create('es_ES');
-
         return [
-            'nombre' => $myFaker->firstName(),
-            'apellido_paterno' => $myFaker->lastName(),
-            'apellido_materno' => $myFaker->lastName(),
+            'nombre' => fake()->firstName(),
+            'apellido_paterno' => fake()->lastName(),
+            'apellido_materno' => fake()->lastName(),
         ];
     }
 }

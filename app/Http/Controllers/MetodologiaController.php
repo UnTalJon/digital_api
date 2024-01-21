@@ -7,7 +7,6 @@ use App\Http\Requests\StoreMetodologiaRequest as StoreRequest;
 use App\Http\Requests\UpdateMetodologiaRequest as UpdateRequest;
 use Illuminate\Http\Request;
 use App\Http\Resources\MetodologiaResource as Resource;
-use App\Http\Resources\MetodologiaCollection as Collection;
 
 class MetodologiaController extends Controller
 {
@@ -16,7 +15,7 @@ class MetodologiaController extends Controller
      */
     public function index()
     {
-        return new Collection(Model::all());
+        return Resource::collection(Model::all());
     }
 
     /**
